@@ -1,6 +1,12 @@
 ﻿namespace LockType
 {
+#if NET48 || NETSTANDARD2_0
+#pragma warning disable CS0659 // Typ überschreibt Object.Equals(object o), überschreibt jedoch nicht Object.GetHashCode()
+#endif
     public struct AtomicLock<T>
+#if NET48 || NETSTANDARD2_0
+#pragma warning restore CS0659 // Typ überschreibt Object.Equals(object o), überschreibt jedoch nicht Object.GetHashCode()
+#endif
     {
         private T? _value;
         private readonly object _lock = new object();
@@ -37,10 +43,12 @@
                    EqualityComparer<T?>.Default.Equals(_value, val);
         }
 
+#if NET5_0_OR_GREATER
         public override int GetHashCode()
         {
             return HashCode.Combine(_value);
         }
+#endif
 
         public static implicit operator T(AtomicLock<T> lockedValue)
         {
@@ -60,6 +68,7 @@
             return new AtomicLock<T>(value);
         }
 
+#if NET5_0_OR_GREATER
         public static AtomicLock<T> operator ++(AtomicLock<T> lockedValue)
         {
             lock (lockedValue._lock)
@@ -427,5 +436,6 @@
                 }
             }
         }
+#endif
     }
 }

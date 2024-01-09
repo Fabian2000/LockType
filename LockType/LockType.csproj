@@ -1,9 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net48;net6.0;net7.0;net8.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>$(AssemblyName)-AtomicLock</Title>
+    <PackageId>$(AssemblyName)-AtomicLock</PackageId>
+    <Authors>Fabian Schlüter</Authors>
+    <Description>AtomicLock&lt;T&gt;: Thread-safe operations for .NET, enabling atomic access and manipulation of shared data.
+</Description>
+	<LangVersion>12</LangVersion>
+	<Copyright>Copyright 2024 by Fabian Schlüter</Copyright>
+	<PackageProjectUrl>https://github.com/Fabian2000/LockType</PackageProjectUrl>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/Fabian2000/LockType.git</RepositoryUrl>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageTags>ThreadSafety, Concurrency, Atomic, Synchronization, Multithreading, Locks, Lock, ThreadSafe, AtomicOperations, DataProtection, SafeAccess, ParallelComputing</PackageTags>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <IsAotCompatible>True</IsAotCompatible>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <IsAotCompatible>True</IsAotCompatible>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
